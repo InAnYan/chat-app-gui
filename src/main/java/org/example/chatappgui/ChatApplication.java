@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -65,7 +66,7 @@ public class ChatApplication extends Application {
         Button userPromptSubmitButton = new Button("Submit");
         userPromptSubmitButton.setOnAction(e -> {
             String userPrompt = userPromptTextField.getText();
-            userPromptTextField.setText("");
+            userPromptTextField.clear();
 
             addMessage(new UserMessage(userPrompt));
 
@@ -103,8 +104,10 @@ public class ChatApplication extends Application {
         authorLabel.setStyle("-fx-font-weight: bold");
         paneVBox.getChildren().add(authorLabel);
 
-        Label messageLabel = new Label(chatMessage.getText());
-        paneVBox.getChildren().add(messageLabel);
+        TextArea message = new TextArea(chatMessage.getText());
+        message.setWrapText(true);
+
+        paneVBox.getChildren().add(message);
 
         pane.getChildren().add(paneVBox);
 
