@@ -1,4 +1,4 @@
-package org.example.chatappgui;
+package org.example.chatappgui.langchain4j;
 
 public class Chat {
     public String execute(String userMessage) {

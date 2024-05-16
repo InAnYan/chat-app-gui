@@ -1,9 +1,9 @@
 package org.example.chatappgui.langchain4j;
 
-public class AiMessage implements ChatMessage {
+public class UserMessage implements ChatMessage {
     private final String message;
 
-    public AiMessage(String message) {
+    public UserMessage(String message) {
         this.message = message;
     }
 
