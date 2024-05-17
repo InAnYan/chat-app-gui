@@ -30,6 +30,7 @@ public class ChatApplication extends Application {
     private VBox chatVBox;
 
     private Chat aiChat = new Chat();
+    private TextField userPromptTextField;
 
     private Parent createAiChatUI() {
         VBox aiChatBox = new VBox(10);
@@ -58,26 +59,29 @@ public class ChatApplication extends Application {
         HBox userPromptHBox = new HBox(10);
         userPromptHBox.setAlignment(Pos.CENTER);
 
-        TextField userPromptTextField = new TextField();
+        userPromptTextField = new TextField();
         HBox.setHgrow(userPromptTextField, Priority.ALWAYS);
+        userPromptTextField.setOnAction(e -> sendMessageToAiEvent());
 
         userPromptHBox.getChildren().add(userPromptTextField);
 
         Button userPromptSubmitButton = new Button("Submit");
-        userPromptSubmitButton.setOnAction(e -> {
-            String userPrompt = userPromptTextField.getText();
-            userPromptTextField.clear();
-
-            addMessage(new UserMessage(userPrompt));
-
-            String aiMessage = aiChat.execute(userPrompt);
-
-            addMessage(new AiMessage(aiMessage));
-        });
+        userPromptSubmitButton.setOnAction(e -> sendMessageToAiEvent());
 
         userPromptHBox.getChildren().add(userPromptSubmitButton);
 
         return userPromptHBox;
+    }
+
+    private void sendMessageToAiEvent() {
+        String userPrompt = userPromptTextField.getText();
+        userPromptTextField.clear();
+
+        addMessage(new UserMessage(userPrompt));
+
+        String aiMessage = aiChat.execute(userPrompt);
+
+        addMessage(new AiMessage(aiMessage));
     }
 
     private void addMessage(ChatMessage chatMessage) {
