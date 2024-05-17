@@ -110,6 +110,7 @@ public class ChatApplication extends Application {
 
         TextArea message = new TextArea(chatMessage.getText());
         message.setWrapText(true);
+        message.setEditable(false);
 
         paneVBox.getChildren().add(message);
 
